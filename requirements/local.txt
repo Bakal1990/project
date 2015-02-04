@@ -1,0 +1,6 @@
+-r production.txt
+coverage
+django-coverage
+django-debug-toolbar
+bpython
+Sphinx
