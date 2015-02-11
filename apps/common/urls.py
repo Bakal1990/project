@@ -7,8 +7,9 @@ admin.autodiscover()
 urlpatterns = patterns(
     'common.views',
     url(r'^admin/', include(admin.site.urls)),
+    url('', include('posts.urls', 'posts')),
     url(r'^profile/', include('profiles.urls', 'profiles')),
-    url(r'^$', 'main', name='main'),
+    url('', include('social.apps.django_app.urls', namespace='social')),
 )
 
 urlpatterns += patterns(

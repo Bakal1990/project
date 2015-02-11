@@ -13,6 +13,7 @@ THIRD_PARTY_APPS = (
     'spurl',
     'django_extensions',
     'sorl.thumbnail',
+    'social.apps.django_app.default',
 )
 
 PROJECT_APPS = (

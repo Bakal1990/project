@@ -15,6 +15,7 @@ DOMAIN = 'grand_project.herokuapp.com'
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = True
 
 EMAIL_HOST = ''
 EMAIL_PORT = 587
@@ -101,6 +102,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'django.core.context_processors.request',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
 )
 
 # User settings
@@ -108,6 +111,7 @@ AUTH_USER_MODEL = 'profiles.User'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
+    'social.backends.instagram.InstagramOAuth2',
 )
 
 LOGIN_URL = '/login/'
@@ -115,6 +119,9 @@ LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/profile/'
 
 LOG_FILE = rel('logs', 'app.log')
+
+SOCIAL_AUTH_RAISE_EXCEPTIONS = True
+RAISE_EXCEPTIONS = True
 
 from .apps import *
 from .logging import *
