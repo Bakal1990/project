@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+	{% for object in object_list %}
+		<div class="row">
+			<div class="col-md-12">
+			{% thumbnail object.image "400x400" crop="center" as im %}
+    		<a href="{% url "posts:detail" object.pk %}"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>
+		{% endthumbnail %}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<form action=" {% url 'posts:like' %}" method="POST"/>
+					{% csrf_token %}
+					<input type="text" name="post_id" value="{{ object.id }}" hidden>
+					<input type="text" name="user_id" value="{{ user.id }}" hidden>
+					<button type="submit" class="btn-default btn-xs">
+						<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+
+				</button>
+				</form>
+
+
+				
+				<div class="col-md-12">
+					<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+					{{ object.likes }}
+				</div>
+				<div>
+					Comments:
+					{% for comment in object.comments.all %}
+						{% if forloop.counter < 5 %}
+							<div class="row">
+								<div class="col-md-12" style="border-style: inset;">
+								{{ comment.text }}
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock content %}

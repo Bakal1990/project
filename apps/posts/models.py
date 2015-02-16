@@ -12,8 +12,10 @@ class Post(models.Model):
     attached = models.BooleanField(default=False)
     image = ImageField('image', upload_to=settings.MEDIA_ROOT, null=True, blank=True)
 
-    def like(self, user):
-        return self.liked_users.add(user)
+    def like_trigger(self, user):
+        if user in self.liked_users.all():
+            return self.liked_users.remove(user)
+        return self.liked_users.add()
 
     def unlike(self, user):
         return self.liked_users.remove(user)
